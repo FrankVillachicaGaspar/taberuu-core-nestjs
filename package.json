@@ -84,6 +84,9 @@
     "testEnvironment": "node"
   },
   "lint-staged": {
-    "*.(js|ts)": "pnpm lint"
+    "*.(js|ts)": [
+      "pnpm lint",
+      "pnpm format"
+    ]
   }
 }
