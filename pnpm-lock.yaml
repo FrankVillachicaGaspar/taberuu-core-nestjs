@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@golevelup/ts-jest':
+        specifier: ^0.5.4
+        version: 0.5.4
       '@nestjs/common':
         specifier: ^10.0.0
         version: 10.3.10(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.1)
@@ -373,6 +376,9 @@ packages:
 
   '@fastify/middie@8.3.1':
     resolution: {integrity: sha512-qrQ8U3iCdjNum3+omnIvAyz21ifFx+Pp5jYW7PJJ7b9ueKTCPXsH6vEvaZQrjEZvOpTnWte+CswfBODWD0NqYQ==}
+
+  '@golevelup/ts-jest@0.5.4':
+    resolution: {integrity: sha512-2djwElTE0dMyjK6uYk7YqGs5BoA++O+bqhzDVsWHXrUD9XlOj3Ig0JeyILC8P7eBvSbWPaA61xaJX4doDvi4oQ==}
 
   '@hapi/hoek@9.3.0':
     resolution: {integrity: sha512-/c6rf4UJlmHlC9b5BaNvzAcFv7HZ2QHaV0D4/HNlBdvFnvQq8RI4kYdhyPCl7Xj+oWvTWQ8ujhqS53LIgAe6KQ==}
@@ -3886,6 +3892,8 @@ snapshots:
       fastify-plugin: 4.5.1
       path-to-regexp: 6.2.2
       reusify: 1.0.4
+
+  '@golevelup/ts-jest@0.5.4': {}
 
   '@hapi/hoek@9.3.0': {}
 

@@ -4,14 +4,16 @@ import { CreateUserController } from '@context/users/infrastructure/http-api/cre
 import { UserRepository } from '@context/users/domain/user.repository';
 import { CreateUserDto } from './create-user.dto';
 import { User } from '../../domain/user';
-import { v4 as uuid } from 'uuid';
 import { EmailAlreadyExistException } from '../../domain/email-already-exist.exception';
+import { createMock, DeepMocked } from '@golevelup/ts-jest';
 
-jest.mock('uuid');
+jest.mock('uuid', () => ({
+  v4: jest.fn().mockReturnValue('7bda974e-af05-4bc9-9bba-0d4827ed3861'),
+}));
 
 describe('CreateUserUseCase', () => {
   let service: CreateUserUseCase;
-  let repository: jest.Mocked<UserRepository>;
+  let repository: DeepMocked<UserRepository>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -20,16 +22,13 @@ describe('CreateUserUseCase', () => {
         CreateUserUseCase,
         {
           provide: UserRepository,
-          useValue: {
-            create: jest.fn(),
-            getById: jest.fn(),
-          },
+          useValue: createMock<UserRepository>(),
         },
       ],
     }).compile();
 
-    repository = module.get(UserRepository) as jest.Mocked<UserRepository>;
-    service = module.get<CreateUserUseCase>(CreateUserUseCase);
+    repository = module.get(UserRepository);
+    service = module.get(CreateUserUseCase);
   });
 
   it('should create a user successfully', async () => {
@@ -40,10 +39,6 @@ describe('CreateUserUseCase', () => {
       password: 'securePassword123',
       roleId: '7bda974e-af05-4bc9-9bba-0d4827ed3861',
     };
-
-    const mockUuid = '034fe5dd-8f7c-43dd-a082-d9f7b3822d2e';
-
-    (uuid as jest.Mock).mockReturnValue(mockUuid);
 
     const createdUser = User.create(userDto);
 
@@ -64,9 +59,6 @@ describe('CreateUserUseCase', () => {
       password: 'securePassword123',
       roleId: '7bda974e-af05-4bc9-9bba-0d4827ed3861',
     };
-
-    const mockUuid = '034fe5dd-8f7c-43dd-a082-d9f7b3822d2e';
-    (uuid as jest.Mock).mockReturnValue(mockUuid);
 
     const createdUser = User.create(userDto);
 
