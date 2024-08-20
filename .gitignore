@@ -2,6 +2,9 @@
 /dist
 /node_modules
 /build
+/mongo-data
+/pgadmin-data
+/postgres-data
 
 # Logs
 logs

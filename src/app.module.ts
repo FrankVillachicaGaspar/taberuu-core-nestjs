@@ -4,7 +4,7 @@ import { LoggerModule } from 'nestjs-pino';
 import {
   CORRELATION_ID_HEADER,
   CorrelationIdMiddleware,
-} from './shared/middleware/correlation-id.middleware';
+} from './middlewares/correlation-id/correlation-id.middleware';
 import { FastifyRequest } from 'fastify';
 import { ConfigModule } from '@nestjs/config';
 import { configLoader } from './config/config-loader';
@@ -12,6 +12,7 @@ import {
   configValidationSchema,
   validationOptions,
 } from './config/config-validation-schema';
+import { SharedModule } from './shared/shared.module';
 
 @Module({
   imports: [
@@ -47,6 +48,7 @@ import {
       validationOptions: validationOptions,
     }),
     UserModule,
+    SharedModule,
   ],
 })
 export class AppModule implements NestModule {
