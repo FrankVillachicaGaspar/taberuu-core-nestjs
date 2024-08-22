@@ -1,73 +1,88 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Taberuu core Nestjs
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Aplicación backend para cartas virtuales de restaurantes.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Tech Stack
 
-## Description
+**Server:** Nestjs, .Net
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Run Locally
 
-## Installation
+### Docker compose
+
+Para levantar el entorno de desarrollo (docker container) con las bases de datos y sus gestores UI debemos ejecutar el siguiente comando.
 
 ```bash
-$ pnpm install
+docker-compose up -d
 ```
 
-## Running the app
+Para apagar el entorno de desarrollo (docker container) ejecuta el siguiente comando.
 
 ```bash
-# development
-$ pnpm run start
-
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
+docker-compose down
 ```
 
-## Test
+### Variables de entorno
+
+El archivo .env contiene las siguientes variables de entorno que deberá configurar.
+La configuración siguiente es la que se utilizará normalmente en desarrollo local.
+
+`NODE_ENV=DEVELOPMENT`
+`PORT=3000`
+`DATABASE_USER=postgres`
+`DATABASE_PASSWORD=postgres`
+`DATABASE_HOST=localhost`
+`DATABASE_PORT=5432`
+`DATABASE_NAME=taberuu_db`
+
+### Levantar proyecto
+
+Clona el proyecto
 
 ```bash
-# unit tests
-$ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
+  git clone FrankVillachicaGaspar/taberuu-core-nestjs
 ```
 
-## Support
+Go to the project directory
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+  cd taberuu-core-nestjs
+```
 
-## Stay in touch
+Install dependencies
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```bash
+  pnpm install
+```
 
-## License
+Start the server
 
-Nest is [MIT licensed](LICENSE).
+```bash
+  pnpm start:dev
+```
+
+### Poblar la base de datos
+
+Una vez levantado el proyecto deberá hacer una petición a la siguiente ruta.
+
+```text
+GET /seed/populate
+```
+
+## Running Tests
+
+To run tests, run the following command
+
+```bash
+  pnpm test
+```
+
+> [!NOTE]  
+> Al realizar un commit se ejecutarán los test automáticamente.
+
+## Resources
+
+Una lista de recursos que puedes estudiar y que se implementaron en el desarrollo de este proyecto.
+
+- [Clean architecture in Nestjs](https://www.youtube.com/watch?v=4_4p5Ojs5XA)
+- [Testing in Nestjs](https://www.tomray.dev/nestjs-unit-testing)
