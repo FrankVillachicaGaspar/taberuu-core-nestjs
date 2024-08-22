@@ -2,6 +2,7 @@ import { Injectable, OnModuleInit } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import postgres from 'postgres';
 import { drizzle, PostgresJsDatabase } from 'drizzle-orm/postgres-js';
+import * as schema from './db/schema';
 
 @Injectable()
 export class DrizzleService implements OnModuleInit {
@@ -11,7 +12,7 @@ export class DrizzleService implements OnModuleInit {
   private password?: string;
   private database?: string;
   private environment?: string;
-  private db: PostgresJsDatabase;
+  private db: PostgresJsDatabase<typeof schema>;
 
   constructor(private readonly configService: ConfigService) {
     this.host = configService.get<string>('dbHost');
@@ -27,11 +28,12 @@ export class DrizzleService implements OnModuleInit {
       const client = postgres(
         `postgres://${this.user}:${this.password}@${this.host}:${this.port}/${this.database}`,
       );
-      this.db = drizzle(client);
+      this.db = drizzle(client, { schema });
     }
   }
 
   getClient() {
+    console.log('Entro');
     if (!this.db) throw new Error('Database is not initialized');
 
     return this.db;

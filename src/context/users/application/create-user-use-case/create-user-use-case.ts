@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrimitiveUser, User } from '../../domain/user';
+import { PrimitiveUser } from '../../domain/user';
 import { CreateUserDto } from './create-user.dto';
 import { UserRepository } from '@context/users/domain/user.repository';
 
@@ -8,9 +8,7 @@ export class CreateUserUseCase {
   constructor(private readonly userRepository: UserRepository) {}
 
   async execute(dto: CreateUserDto): Promise<{ user: PrimitiveUser }> {
-    const user = User.create(dto);
-
-    await this.userRepository.create(user);
+    const user = await this.userRepository.create(dto);
 
     return {
       user: user.toValue(),

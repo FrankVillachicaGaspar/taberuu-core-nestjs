@@ -1,5 +1,5 @@
 {
-  "id": "c85b1575-c428-4d69-a95b-d6e0f02a317d",
+  "id": "829f8b1b-f93e-4a36-9df4-09611977e14d",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -58,7 +58,7 @@
           "name": "updated_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": "now()"
         },
         "deleted_at": {
@@ -119,7 +119,7 @@
           "name": "updated_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": "now()"
         },
         "deleted_at": {
@@ -181,7 +181,7 @@
           "name": "updated_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": "now()"
         },
         "deleted_at": {
@@ -266,8 +266,7 @@
           "name": "updated_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
+          "notNull": false
         },
         "deleted_at": {
           "name": "deleted_at",
@@ -280,8 +279,7 @@
           "type": "roles",
           "typeSchema": "dbo",
           "primaryKey": false,
-          "notNull": true,
-          "default": "'CUSTOMER'"
+          "notNull": true
         }
       },
       "indexes": {},

@@ -50,14 +50,12 @@ export const users = taberuuSchema.table('users', {
   updatedAt: timestamp('updated_at', {
     withTimezone: true,
     mode: 'date',
-  })
-    .defaultNow()
-    .notNull(),
+  }),
   deletedAt: timestamp('deleted_at', {
     withTimezone: true,
     mode: 'date',
   }),
-  role: roles('role').notNull().default('CUSTOMER'),
+  role: roles('role').notNull(),
 });
 
 /* Restaurants */
@@ -75,9 +73,7 @@ export const restaurants = taberuuSchema.table('restaurants', {
   updatedAt: timestamp('updated_at', {
     withTimezone: true,
     mode: 'date',
-  })
-    .defaultNow()
-    .notNull(),
+  }).defaultNow(),
   deletedAt: timestamp('deleted_at', {
     withTimezone: true,
     mode: 'date',
@@ -109,9 +105,7 @@ export const establishments = taberuuSchema.table('establishments', {
   updatedAt: timestamp('updated_at', {
     withTimezone: true,
     mode: 'date',
-  })
-    .defaultNow()
-    .notNull(),
+  }).defaultNow(),
   deletedAt: timestamp('deleted_at', {
     withTimezone: true,
     mode: 'date',
@@ -147,9 +141,7 @@ export const schedules = taberuuSchema.table('schedules', {
   updatedAt: timestamp('updated_at', {
     withTimezone: true,
     mode: 'date',
-  })
-    .defaultNow()
-    .notNull(),
+  }).defaultNow(),
   deletedAt: timestamp('deleted_at', {
     withTimezone: true,
     mode: 'date',

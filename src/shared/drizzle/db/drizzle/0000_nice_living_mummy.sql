@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS "dbo"."establishments" (
 	"status" boolean DEFAULT false NOT NULL,
 	"automatic_status" boolean DEFAULT false NOT NULL,
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
-	"updated_at" timestamp with time zone DEFAULT now() NOT NULL,
+	"updated_at" timestamp with time zone DEFAULT now(),
 	"deleted_at" timestamp with time zone,
 	"restaurant_id" uuid NOT NULL
 );
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS "dbo"."restaurants" (
 	"description" text NOT NULL,
 	"logo_image" text,
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
-	"updated_at" timestamp with time zone DEFAULT now() NOT NULL,
+	"updated_at" timestamp with time zone DEFAULT now(),
 	"deleted_at" timestamp with time zone,
 	"owner_id" uuid NOT NULL
 );
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS "dbo"."schedules" (
 	"open_time" timestamp with time zone NOT NULL,
 	"close_time" timestamp with time zone NOT NULL,
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
-	"updated_at" timestamp with time zone DEFAULT now() NOT NULL,
+	"updated_at" timestamp with time zone DEFAULT now(),
 	"deleted_at" timestamp with time zone,
 	"establishment_id" uuid NOT NULL
 );
@@ -57,8 +57,8 @@ CREATE TABLE IF NOT EXISTS "dbo"."users" (
 	"phone_number" char(15),
 	"phone_code" char(10),
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
-	"updated_at" timestamp with time zone DEFAULT now() NOT NULL,
+	"updated_at" timestamp with time zone,
 	"deleted_at" timestamp with time zone,
-	"role" "dbo"."roles" DEFAULT 'CUSTOMER' NOT NULL,
+	"role" "dbo"."roles" NOT NULL,
 	CONSTRAINT "users_email_unique" UNIQUE("email")
 );

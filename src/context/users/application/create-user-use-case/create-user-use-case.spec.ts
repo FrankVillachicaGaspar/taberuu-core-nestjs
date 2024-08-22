@@ -4,8 +4,9 @@ import { CreateUserController } from '@context/users/infrastructure/http-api/cre
 import { UserRepository } from '@context/users/domain/user.repository';
 import { CreateUserDto } from './create-user.dto';
 import { User } from '../../domain/user';
-import { EmailAlreadyExistException } from '../../domain/email-already-exist.exception';
+import { EmailAlreadyExistException } from '../../domain/exceptions/email-already-exist.exception';
 import { createMock, DeepMocked } from '@golevelup/ts-jest';
+import { Roles } from '@src/shared/enums/roles.enum';
 
 jest.mock('uuid', () => ({
   v4: jest.fn().mockReturnValue('7bda974e-af05-4bc9-9bba-0d4827ed3861'),
@@ -37,16 +38,25 @@ describe('CreateUserUseCase', () => {
       lastname: 'Doe',
       email: 'sample@sample.com',
       password: 'securePassword123',
-      roleId: '7bda974e-af05-4bc9-9bba-0d4827ed3861',
+      role: Roles.CUSTOMER,
     };
 
-    const createdUser = User.create(userDto);
+    const createdUser = new User({
+      ...userDto,
+      id: '1e83bda2-cb0f-436d-9544-50c2c495f8d7',
+      profileImage: null,
+      phoneNumber: null,
+      phoneCode: null,
+      createdAt: new Date(),
+      updatedAt: null,
+      deletedAt: null,
+    });
 
-    repository.create.mockResolvedValueOnce();
+    repository.create.mockResolvedValueOnce(Promise.resolve(createdUser));
 
     const result = await service.execute(userDto);
 
-    expect(repository.create).toHaveBeenCalledWith(createdUser);
+    expect(repository.create).toHaveBeenCalledWith(userDto);
 
     expect(result.user).toEqual(createdUser.toValue());
   });
@@ -57,19 +67,17 @@ describe('CreateUserUseCase', () => {
       lastname: 'Doe',
       email: 'sample@sample.com',
       password: 'securePassword123',
-      roleId: '7bda974e-af05-4bc9-9bba-0d4827ed3861',
+      role: Roles.CUSTOMER,
     };
 
-    const createdUser = User.create(userDto);
-
     repository.create.mockRejectedValueOnce(() => {
-      throw new EmailAlreadyExistException(createdUser.toValue().email);
+      throw new EmailAlreadyExistException(userDto.email);
     });
 
     await expect(service.execute(userDto)).rejects.toThrow(
       EmailAlreadyExistException,
     );
 
-    expect(repository.create).toHaveBeenCalledWith(createdUser);
+    expect(repository.create).toHaveBeenCalledWith(userDto);
   });
 });

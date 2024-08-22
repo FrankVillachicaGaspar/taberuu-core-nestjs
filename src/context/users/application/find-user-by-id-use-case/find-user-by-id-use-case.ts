@@ -1,7 +1,7 @@
 import { UserRepository } from '../../domain/user.repository';
 import { FindUsersByIdDto } from './find-user-by-id.dto';
 import { PrimitiveUser } from '../../domain/user';
-import { UserNotFoundException } from '../../domain/user-not-found.exception';
+import { UserNotFoundException } from '../../domain/exceptions/user-not-found.exception';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
