@@ -16,6 +16,7 @@
     "test": "jest --verbose",
     "test:watch": "jest --watch --verbose",
     "test:cov": "jest --coverage --config=./jest.config.ts",
+    "test:cov:action": "jest --json --coverage --config=./jest.config.ts --outputFile=report.json",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "prepare": "husky",
