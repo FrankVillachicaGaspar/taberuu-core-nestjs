@@ -11,8 +11,9 @@ on:
       - main
 
 jobs:
-  setup-and-install-deps:
+  Testing:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -25,44 +26,21 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm
 
-      - name: List directory before install
-        run: ls
-
       - name: Install dependencies
         run: pnpm install
 
-  lint:
-    runs-on: ubuntu-latest
-    needs: setup-and-install-deps
-    steps:
       - name: Run Lint
         run: pnpm lint
 
-  format:
-    runs-on: ubuntu-latest
-    needs: lint
-    steps:
       - name: Format code
         run: pnpm format
 
-  build:
-    runs-on: ubuntu-latest
-    needs: format
-    steps:
       - name: Build application
         run: pnpm build
 
-  unit-test:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
       - name: Run Unit Tests
         run: pnpm test
 
-  test-cov:
-    runs-on: ubuntu-latest
-    needs: unit-test
-    steps:
       - name: Check Jest configuration
         run: cat jest.config.ts
 
