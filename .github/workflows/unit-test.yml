@@ -13,11 +13,8 @@ on:
 jobs:
   checkout:
     runs-on: ubuntu-latest
-    outputs:
-      workspace: ${{ steps.checkout.outputs.workspace }}
     steps:
       - name: Checkout code
-        id: checkout
         uses: actions/checkout@v3
 
   setup-node:
@@ -29,12 +26,9 @@ jobs:
         with:
           node-version: '20.16.0'
 
-  install:
-    runs-on: ubuntu-latest
-    needs: setup-node
-    steps:
       - name: Install pnpm
         run: npm install -g pnpm
+
       - name: Install dependencies
         run: pnpm install
 
