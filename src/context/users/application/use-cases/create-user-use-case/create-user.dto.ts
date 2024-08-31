@@ -1,4 +1,4 @@
-import { Roles } from '@src/shared/enums/roles.enum';
+import { Roles } from '@shared/enums/roles.enum';
 
 export class CreateUserDto {
   name: string;

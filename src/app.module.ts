@@ -7,11 +7,11 @@ import {
 } from './shared/middlewares/correlation-id/correlation-id.middleware';
 import { FastifyRequest } from 'fastify';
 import { ConfigModule } from '@nestjs/config';
-import { configLoader } from './config/config-loader';
+import { configLoader } from './config/config-loader.config';
 import {
   configValidationSchema,
   validationOptions,
-} from './config/config-validation-schema';
+} from './config/config-validation-schema.config';
 import { SharedModule } from './shared/shared.module';
 import { SeedModule } from './context/seed/infrastructure/seed.module';
 

@@ -3,7 +3,7 @@ import { SeedRepository } from '../../domain/seed.repository';
 import { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import * as schema from '@src/shared/drizzle/db/schema';
-import { CreateUserDto } from '@src/context/users/application/create-user-use-case/create-user.dto';
+import { CreateUserDto } from '@src/context/users/application/use-cases/create-user-use-case/create-user.dto';
 
 @Injectable()
 export class PostgresSeedRepository implements SeedRepository, OnModuleInit {

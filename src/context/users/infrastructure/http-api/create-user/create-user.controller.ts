@@ -1,20 +1,30 @@
-import { Body, Controller, Post, Logger } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  InternalServerErrorException,
+  BadRequestException,
+} from '@nestjs/common';
 import { CreateUserHttpDto } from './create-user.http-dto';
-import { CreateUserUseCase } from '@context/users/application/create-user-use-case/create-user-use-case';
-import { PrimitiveUser } from '@context/users/domain/user';
+import { CreateUserUseCase } from '@src/context/users/application/use-cases/create-user-use-case/create-user-use-case';
+import { EmailAlreadyExistException } from '@src/context/users/domain/errors/email-already-exist.error';
+import { UserResponse } from '@src/context/users/application/dtos/user-response.dto';
 
 @Controller('user')
 export class CreateUserController {
-  private readonly logger = new Logger(CreateUserController.name);
-
   constructor(private createUserUseCase: CreateUserUseCase) {}
 
   @Post()
   async run(
     @Body() createUserHttpDto: CreateUserHttpDto,
-  ): Promise<{ user: PrimitiveUser }> {
-    this.logger.log('Creating users in controller');
+  ): Promise<{ user: UserResponse }> {
+    try {
+      return await this.createUserUseCase.execute(createUserHttpDto);
+    } catch (error) {
+      if (error instanceof EmailAlreadyExistException)
+        throw new BadRequestException(error.message);
 
-    return await this.createUserUseCase.execute(createUserHttpDto);
+      throw new InternalServerErrorException(error.message);
+    }
   }
 }

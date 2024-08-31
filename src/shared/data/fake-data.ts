@@ -1,12 +1,12 @@
 import { faker } from '@faker-js/faker';
-import { CreateUserDto } from '@src/context/users/application/create-user-use-case/create-user.dto';
-import { Roles } from '@src/shared/enums/roles.enum';
+import { CreateUserDto } from '@src/context/users/application/use-cases/create-user-use-case/create-user.dto';
+import { Roles } from '@shared/enums/roles.enum';
 
 /**
  * Generates an array of fake user data.
  *
  * @param {number} count - The number of users to generate.
- * @param {Roles} role - The role of the users to generate.
+ * @param {String} role - The role of the users to generate.
  * @param {string} [emailProvider] - The email provider to use for the generated users.
  * @return {CreateUserDto[]} An array of fake user data.
  */

@@ -1,0 +1,4 @@
+export enum PaginationEnum {
+  DEFAULT_PAGE_LIMIT = 10,
+  PAGINATION_ERROR = 'PAGINATION_ERROR',
+}
