@@ -38,6 +38,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Save node_modules as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: node-modules
+          path: |
+            node_modules
+            ~/.pnpm-store
+
   lint-and-format:
     runs-on: ubuntu-latest
     needs: setup
@@ -50,19 +58,13 @@ jobs:
         with:
           node-version: '20.16.0'
 
+      - name: Restore node_modules
+        uses: actions/download-artifact@v3
+        with:
+          name: node-modules
+
       - name: Install pnpm
         run: npm install -g pnpm
-
-      - name: Cache pnpm store
-        uses: actions/cache@v3
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies
-        run: pnpm install
 
       - name: Run Lint
         run: pnpm lint
@@ -143,4 +145,4 @@ jobs:
       - uses: ArtiomTr/jest-coverage-report-action@v2
         with:
           package-manager: pnpm
-          test-script: test:cov
+          test-script: pnpm test:cov
