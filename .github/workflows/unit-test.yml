@@ -11,16 +11,12 @@ on:
       - main
 
 jobs:
-  checkout:
+  setup-and-install-deps:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-  setup-and-install-deps:
-    runs-on: ubuntu-latest
-    needs: checkout
-    steps:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
@@ -30,7 +26,7 @@ jobs:
         run: npm install -g pnpm
 
       - name: List directory before install
-        run: ls -la
+        run: ls
 
       - name: Install dependencies
         run: pnpm install
