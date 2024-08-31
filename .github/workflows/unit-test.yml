@@ -1,0 +1,62 @@
+name: Unit Test
+
+on:
+  push:
+    branches:
+      - 'feature/**'
+      - 'bug/**'
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  standard-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.16.0'
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run Lint
+        run: pnpm lint
+
+      - name: Format code
+        run: pnpm format
+
+      - name: Build application
+        run: pnpm build
+
+      - name: Run Unit Tests
+        run: pnpm test
+
+  coverage:
+    permissions:
+      checks: write
+      pull-requests: write
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.16.0'
+      - name: Install pnpm
+        run: npm install -g pnpm
+      - uses: ArtiomTr/jest-coverage-report-action@v2
+        id: coverage
+        with:
+          annotations: none
+          package-manager: pnpm
+          test-script: pnpm test:cov:action
+          icons: emoji

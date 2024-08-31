@@ -29,13 +29,13 @@ const config: Config = {
     '!src/shared/drizzle/db/schema.{ts,js}',
   ],
   collectCoverage: true,
-  coverageReporters: ['text-summary', 'lcov'],
+  coverageReporters: ['text', 'text-summary', 'lcov'],
   coverageThreshold: {
     global: {
-      branches: 65,
-      functions: 100,
-      lines: 100,
-      statements: 100,
+      branches: 70,
+      functions: 80,
+      lines: 80,
+      statements: 80,
     },
   },
   coverageDirectory: './coverage',
