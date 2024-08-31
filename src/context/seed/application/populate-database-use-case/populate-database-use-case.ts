@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { SeedRepository } from '../../domain/seed.repository';
-import { generateUsers } from '../../infrastructure/data/fake-data';
-import { Roles } from '@src/shared/enums/roles.enum';
+import { generateUsers } from '../../../../shared/data/fake-data';
+import { Roles } from '@shared/enums/roles.enum';
 
 @Injectable()
 export class PopulateDatabaseUseCase {

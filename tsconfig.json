@@ -18,8 +18,11 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "noFallthroughCasesInSwitch": true,
+    "preserveConstEnums": false,
     "paths": {
-      "@src/*": ["src/*"],
+      "@src/*": [
+        "src/*"
+      ],
       "@context/*": [
         "src/context/*"
       ],

@@ -5,7 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 describe('DrizzleService', () => {
   let service: DrizzleService;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [DrizzleService],
       imports: [ConfigModule],

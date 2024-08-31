@@ -1,22 +1,18 @@
-import { CreateUserUseCase } from '@context/users/application/create-user-use-case/create-user-use-case';
+import { CreateUserUseCase } from '@src/context/users/application/use-cases/create-user-use-case/create-user-use-case';
 import { Test, TestingModule } from '@nestjs/testing';
 import { CreateUserController } from '@context/users/infrastructure/http-api/create-user/create-user.controller';
 import { UserRepository } from '@context/users/domain/user.repository';
 import { CreateUserDto } from './create-user.dto';
-import { User } from '../../domain/user';
-import { EmailAlreadyExistException } from '../../domain/exceptions/email-already-exist.exception';
+import { User } from '../../../domain/user';
+import { EmailAlreadyExistException } from '../../../domain/errors/email-already-exist.error';
 import { createMock, DeepMocked } from '@golevelup/ts-jest';
-import { Roles } from '@src/shared/enums/roles.enum';
-
-jest.mock('uuid', () => ({
-  v4: jest.fn().mockReturnValue('7bda974e-af05-4bc9-9bba-0d4827ed3861'),
-}));
+import { Roles } from '@shared/enums/roles.enum';
 
 describe('CreateUserUseCase', () => {
   let service: CreateUserUseCase;
   let repository: DeepMocked<UserRepository>;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [CreateUserController],
       providers: [
@@ -70,9 +66,9 @@ describe('CreateUserUseCase', () => {
       role: Roles.CUSTOMER,
     };
 
-    repository.create.mockRejectedValueOnce(() => {
-      throw new EmailAlreadyExistException(userDto.email);
-    });
+    repository.create.mockRejectedValueOnce(
+      new EmailAlreadyExistException(userDto.email),
+    );
 
     await expect(service.execute(userDto)).rejects.toThrow(
       EmailAlreadyExistException,

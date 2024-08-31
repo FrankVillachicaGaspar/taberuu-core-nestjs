@@ -1,4 +1,3 @@
-import { Roles } from '@src/shared/enums/roles.enum';
 import {
   IsEmail,
   IsEnum,
@@ -8,6 +7,7 @@ import {
   IsString,
   MaxLength,
 } from 'class-validator';
+import { Roles } from '@shared/enums/roles.enum';
 
 export class CreateUserHttpDto {
   @IsNotEmpty()

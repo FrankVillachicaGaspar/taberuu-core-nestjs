@@ -33,7 +33,6 @@ export class DrizzleService implements OnModuleInit {
   }
 
   getClient() {
-    console.log('Entro');
     if (!this.db) throw new Error('Database is not initialized');
 
     return this.db;
