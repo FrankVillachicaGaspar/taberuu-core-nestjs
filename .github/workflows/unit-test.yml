@@ -52,6 +52,8 @@ jobs:
         with:
           node-version: '20.16.0'
           cache: 'pnpm'
+      - name: Install pnpm
+        run: npm install -g pnpm
       - uses: ArtiomTr/jest-coverage-report-action@v2
         id: coverage
         with:
