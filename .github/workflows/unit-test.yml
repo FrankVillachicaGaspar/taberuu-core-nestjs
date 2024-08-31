@@ -17,7 +17,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-  setup-node:
+  setup-and-install-deps:
     runs-on: ubuntu-latest
     needs: checkout
     steps:
@@ -28,6 +28,9 @@ jobs:
 
       - name: Install pnpm
         run: npm install -g pnpm
+
+      - name: List directory before install
+        run: ls -la
 
       - name: Install dependencies
         run: pnpm install
