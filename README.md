@@ -76,10 +76,10 @@ La configuración siguiente es la que se utilizará normalmente en desarrollo lo
     ```bash
     pnpm db-migrate
     ```
-   
-   > [!IMPORTANT]   
-   > Antes de migrar la base de datos debemos crear el archivo .env con las varables de entorno de desarrollo indicadas
-   > en el apartado [Variables de entorno](#variables-de-entorno).
+
+> [!IMPORTANT]  
+> Antes de migrar la base de datos debemos crear el archivo .env con las variables de entorno de desarrollo indicadas
+> en el apartado [Variables de entorno](#variables-de-entorno).
 
 6. **Start the server**
     ```bash
